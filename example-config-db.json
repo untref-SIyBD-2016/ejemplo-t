@@ -1,0 +1,6 @@
+{
+  "user": "postgres",
+  "database": "clase3_db", 
+  "password": "admin",
+  "port": 5432
+}

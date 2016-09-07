@@ -1,0 +1,19 @@
+{
+  "name": "ejemplo-t",
+  "description": "Ejemplo de tablas, front-end y back-end",
+  "version": "0.0.1",
+  "author": "Emilio Platzer <emilioplatzer@gmail.com>",
+  "repository": "untref-SIyBD-2016/ejemplo-t",
+  "license": "MIT",
+  "main": "server/server.js",
+  "dependencies": {
+    "express": "~4.14.0",
+    "pg": "~6.1.0"
+  },
+  "engines": {
+    "node": ">= 4.0"
+  },
+  "scripts": {
+    "start": "node server/server.js"
+  }
+}

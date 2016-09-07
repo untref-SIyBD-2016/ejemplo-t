@@ -1,0 +1,11 @@
+table{
+    border-collapse: collapse;
+    font-family: arial;
+}
+
+td{
+    border:2px solid orange;
+    min-width:50px;
+    text-align:right;
+    padding:3px;
+}
