@@ -23,7 +23,8 @@ WITH viviendas AS (
          comuna,
          fexp
     FROM eah2015_usuarios_hog
-    WHERE nhogar=1)
+    WHERE nhogar=1
+	  AND h2=$1)
 SELECT comuna, tipo_viv, 
        round(SUM(fexp)*100.0/(SELECT SUM(fexp) FROM viviendas d WHERE d.comuna=n.comuna),1) as proporcion
   FROM viviendas n
@@ -34,6 +35,7 @@ SELECT comuna, tipo_viv,
 var pg = require('pg'); // https://www.npmjs.com/package/pg#client-pooling
 
 app.get('/datos', function(req, res){
+  console.log('entre a /datos con valores:',req.query);
   var config = require('../local-config-db.json')
   var pool = new pg.Pool(config);
   res.set('Content-Type', 'application/json');
@@ -41,7 +43,7 @@ app.get('/datos', function(req, res){
     if(err) {
       res.send('ERROR - No se pudo conectar: '+err.message);
     }
-    client.query(sql, function(err, result) {
+    client.query(sql.replace('$1', req.query.regimen), function(err, result) {
       done();
       if(err) {
         res.send('ERROR - Al ejecutar la consulta: '+err.message);

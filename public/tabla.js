@@ -16,10 +16,9 @@ comunas.forEach(function(comuna){
 });
 
 function meter_datos(datos){
-    return;
     datos.forEach(function(registro){
         var i=registro.comuna;
-        var j=tipos_viv[registro.tipo_viv]
+        var j=tipos_viv[registro.tipo_viv];
         matriz[i][j]=registro.proporcion;
     });
 }
@@ -36,11 +35,14 @@ function mostrar_matriz(){
     });
 }
 
-fetch('/datos').then(function(response){
-    return response.json().then(function(datos) {  
-        meter_datos(datos);
-        mostrar_matriz();
-    });
-}).catch(function(err){
-    pizarra.textContent=err.message;
-});
+traer.onclick=function(){
+	pizarra.innerHTML='';
+	fetch('/datos?regimen='+regimen.value).then(function(response){
+		return response.json().then(function(datos) {  
+			meter_datos(datos);
+			mostrar_matriz();
+		});
+	}).catch(function(err){
+		pizarra.textContent=err.message;
+	});
+}	
